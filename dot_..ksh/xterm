@@ -1,0 +1,20 @@
+bkslsh=\\
+TBS=']2;'
+TBE=''
+
+NBS=']1;'
+NBE=''
+
+wtitle() { echo -n ${TBS}$*$TBE ; }
+wicon() { echo -n ${NBS}$*$NBE ; }
+
+if [ $UID != chk ]
+then
+wai () { echo -n ${TBS}${user}@${MYHOST}:${PWD}$TBE ; }
+else
+wai () { echo -n ${TBS}${MYHOST}:${PWD}$TBE ; }
+fi
+
+#cd () { builtin cd "$@" ; wai ; }
+#pushd () { builtin pushd $* ; wai ; }
+#alias popd='popd;wai'

@@ -1,0 +1,32 @@
+---
+fail_fast: false
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: check-merge-conflict
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
+      - id: trailing-whitespace
+        args: [--markdown-linebreak-ext=md]
+  - repo: https://github.com/Lucas-C/pre-commit-hooks
+    rev: v1.4.2
+    hooks:
+      - id: remove-crlf
+  - repo: https://github.com/sirosen/texthooks
+    rev: 0.5.0
+    hooks:
+      - id: fix-smartquotes
+        exclude: ^ansible/manifests/
+      - id: fix-ligatures
+        exclude: ^ansible/manifests/
+  - repo: https://github.com/onedr0p/sops-pre-commit
+    rev: v2.1.1
+    hooks:
+      - id: forbid-secrets
+  - repo: https://github.com/gitguardian/gg-shield
+    rev: v1.14.3
+    hooks:
+      - id: ggshield
+        language_version: python3
+        stages: [commit]

@@ -1,0 +1,25 @@
+alerts () {
+    curl -s 'http://heimdall:9093/alerts/api/v2/alerts?silenced=false&inhibited=false' | jq -S '.[]|.labels.alertname + " " + .labels.instance'
+}
+
+function kubectlgetall {
+  for i in $(kubectl api-resources --verbs=list --namespaced -o name | grep -v "events.events.k8s.io" | grep -v "events" | sort | uniq); do
+    echo "Resource:" $i
+    kubectl get -n ${1} --ignore-not-found=true ${i}
+  done
+}
+
+borgsizes() {
+	printf 'Archive\t\t\t\t\tOrig\tComp\tDedup\n'
+	printf '%-32.32s\t%s\t%s\t%s\n' \
+		$(sudo -E borg info --json --sort-by name --glob-archives '*' | \
+		  jq '.archives[] | "\(.name) \(.stats.original_size) \(.stats.compressed_size) \(.stats.deduplicated_size)"' | \
+		  sed --expression='s/^"//;s/"$//' | \
+		  numfmt --field='2-4' --to=iec)
+}
+
+alias containers="kubectl get pods --all-namespaces -o jsonpath=\"{.items[*].spec['containers','initContainers'][*].image}\" |tr -s '[[:space:]]' '\n' |sort |uniq -c"
+
+if [ -r $dotdot/aliases_private ] ; then
+    sourcec $dotdot/aliases_private
+fi

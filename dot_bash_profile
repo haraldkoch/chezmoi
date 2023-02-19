@@ -1,0 +1,83 @@
+# Harald's .profile -- far better than the rest :-)
+#
+# $Revision: 1.6 $
+# $Date: 89/12/01 15:05:01 $
+
+#ENV=~/.bashrc export ENV
+#. $ENV
+. ~/.bashrc
+
+uptime
+
+#
+# terminal stuff
+#
+#TERMINFO=~chk/etc/terminfo	export TERMINFO
+#TERMCAP=~chk/etc/termcap	export TERMCAP
+
+if test x$TERM = x -o x$TERM = xdumb -o x$TERM = xdialup -o x$TERM = xnetwork -o x$TERM = xunknown; then
+	TERM=`tset - -m dialup:vt100 -IQ`
+fi
+if test x$TERM = xunknown ; then
+	TERM=vt100
+fi
+if test x$TERM = xdumb ; then
+	TERM=vt100
+fi
+#if test $TERM = network ; then
+#	TERM=xterm
+#fi
+
+if test $TERM = console ; then
+	TERM=vt100
+fi
+if test $TERM = linux ; then
+	TERM=vt100
+fi
+
+# and some terminal settings..
+#
+stty -tabs kill ^U intr ^C erase ^H eof ^D susp ^Z stop ^S start ^Q
+
+case "$TERM" in
+wy30|wx|addsvp)
+	# for all wyse non-60's, use the 'wx' term
+	# entry -- it's the same as a wy30 but with
+	# no underline, reverse video etc
+	#
+	TERM=wx
+	. "$dotdot"/wx
+	;;
+
+iris-ansi*)
+	. "$dotdot"/ansi
+	;;
+
+	# network: assume it's a wyse60
+	#
+network|wy60*)
+	. "$dotdot/vt100"
+	;;
+
+*)
+	# see if I have something to handle it
+	#
+	if test -r $dotdot/"$TERM" ; then
+		. $dotdot/"$TERM"
+	fi
+esac
+
+export TERM
+
+#
+# ENVIRONMENT
+#
+. $dotdot/environment
+
+umask 22
+
+echo "--------"
+echo "Cookie:"
+cookie
+echo "--------"
+

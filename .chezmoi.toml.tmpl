@@ -1,0 +1,15 @@
+{{- $email := "" -}}
+{{- if hasKey . "email" -}}
+{{-   $email = .email -}}
+{{- else -}}
+{{- $email := promptString "git email" -}}
+{{- end -}}
+
+[data]
+	name = "Harald Koch"
+	email =	{{ $email | quote }}
+
+encryption = "age"
+[age]
+	identity = "~/key.txt"
+	recipient = "age15wv2n8tus9wx7ckc9wc22qw6yjgkcut60zkpgex665ds2eezlaxq6em9yf"

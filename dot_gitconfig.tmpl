@@ -1,0 +1,35 @@
+[user]
+	name = {{ .name }}
+	email = {{ .email }}
+{{- if hasKey . "signingkey" }}
+	signingkey = {{ .signingkey }}
+{{- end }}
+[color]
+	ui = true
+[commit]
+	gpgsign = true
+[core]
+	editor = jove
+	autocrlf = input
+	pager = less -r
+[credential]
+	helper = cache --timeout=3600
+[format]
+	signOff = true
+[gpg]
+	program = gpg
+[http]
+	followRedirects = true
+[init]
+	defaultBranch = main
+[pull]
+	rebase = true
+[push]
+	autoSetupRemote = true
+	default = simple
+[tag]
+	forceSignAnnotated = true
+[url "ssh://git@github.com/"]
+	pushInsteadOf = https://github.com/
+[alias]
+	yolo = !git commit -m \"$(curl -sL whatthecommit.com/index.txt)\"

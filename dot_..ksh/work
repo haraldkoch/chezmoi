@@ -1,0 +1,26 @@
+CDPATH=".:~/etc/cdLinks:~:~/workspaces/git:~/workspaces/svn"	export CDPATH
+
+export ANSIBLE_VAULT_PASSWORD_FILE=~/.vault_pass_icss.txt
+
+coredistro() {
+	export vmprodordev=staging
+	export ANSIBLE_INVENTORY=~/ansible/inventory/staging
+	export ANSIBLE_ROLES_PATH=~/ansible/core-distro-playbooks/automated_MultiOS_core_server_v3/playbooks/roles
+	export ANSIBLE_VAULT_PASSWORD_FILE=~/.vault_pass_icss.txt
+	export ANSIBLE_CONFIG=~/ansible/core-distro-playbooks/automated_MultiOS_core_server_v3/playbooks/ansible.cfg
+}
+
+coredistrodev() {
+	export vmprodordev=staging
+	export ANSIBLE_INVENTORY=~/ansible/inventory/staging
+	export ANSIBLE_ROLES_PATH=~/.ansible/roles:/usr/share/ansible/roles:/etc/ansible/roles:~/workspaces/git/core-distro-playbooks/roles
+	export ANSIBLE_VAULT_PASSWORD_FILE=~/.vault_pass_icss.txt
+	export ANSIBLE_CONFIG=~/workspaces/git/core-distro-playbooks/ansible.cfg
+}
+
+alerts () {
+	curl -s 'https://prmdcv-ldvmgt01.uhn.ca/alerts/api/v2/alerts?silenced=false&inhibited=false' | jq -S '.[]|.labels.alertname + " " + .labels.instance'
+}
+
+unalias sshkeys
+alias sshkeys="/usr/bin/ssh-add ~/.ssh/id_ed25519 ~/.ssh/id_ansible_icss"
