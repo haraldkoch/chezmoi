@@ -1,3 +1,10 @@
+signpkg() {
+  pkg=$1
+  key=9DADB840E2DB03888C3EBB3052676D3D2207F7EB
+
+  gpg -u ${key} --output ${pkg}.sig --detach-sign ${pkg}
+}
+
 alerts () {
     curl -s 'http://heimdall:9093/alerts/api/v2/alerts?silenced=false&inhibited=false' | jq -S '.[]|.labels.alertname + " " + .labels.instance'
 }
@@ -21,5 +28,5 @@ borgsizes() {
 alias containers="kubectl get pods --all-namespaces -o jsonpath=\"{.items[*].spec['containers','initContainers'][*].image}\" |tr -s '[[:space:]]' '\n' |sort |uniq -c"
 
 if [ -r $dotdot/aliases_private ] ; then
-    sourcec $dotdot/aliases_private
+    source $dotdot/aliases_private
 fi

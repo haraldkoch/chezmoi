@@ -10,12 +10,12 @@ unset MAILCHECK
 #ENV=~/.bashrc							export ENV
 dotdot=~/...ksh							export dotdot
 
-CDPATH=".:~/etc/cdLinks:~:~/src:/scratch/video"		export CDPATH
-HISTFILE=/var/tmp/.history.$user					export HISTFILE
-HISTSIZE=500										export HISTSIZE
-HISTFILESIZE=500									export HISTFILESIZE
-HISTCONTROL=ignoreboth								export HISTCONTROL
-FIGNORE=".o:~"										export FIGNORE
+CDPATH=".:~/etc/cdLinks:~:~/src:/scratch/video"			export CDPATH
+HISTFILE=/var/tmp/.history.$user				export HISTFILE
+HISTSIZE=500							export HISTSIZE
+HISTFILESIZE=500						export HISTFILESIZE
+HISTCONTROL=ignoreboth						export HISTCONTROL
+FIGNORE=".o:~"							export FIGNORE
 
 notify=1
 no_exit_on_failed_exec=1
@@ -204,3 +204,11 @@ fi
 #############
 
 complete -C /usr/bin/mcli mcli
+
+#########
+# kopia #
+#########
+
+if test -x /usr/bin/kopia ; then
+	eval "$(kopia --completion-script-bash)"
+fi
