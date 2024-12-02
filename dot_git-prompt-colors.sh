@@ -16,11 +16,11 @@ override_git_prompt_colors() {
   # GIT_PROMPT_BRANCH="${Magenta}"        # the git branch that is active in the current directory
   # GIT_PROMPT_STAGED="${Red}●"           # the number of staged files/directories
   # GIT_PROMPT_CONFLICTS="${Red}✖ "       # the number of files in conflict
-  # GIT_PROMPT_CHANGED="${Blue}✚ "        # the number of changed files
+  GIT_PROMPT_CHANGED="${Cyan}✚ "        # the number of changed files
 
   # GIT_PROMPT_REMOTE=" "                 # the remote branch name (if any) and the symbols for ahead and behind
   # GIT_PROMPT_UNTRACKED="${Cyan}…"       # the number of untracked files/dirs
-  # GIT_PROMPT_STASHED="${BoldBlue}⚑ "    # the number of stashed files/dir
+  GIT_PROMPT_STASHED="${BoldCyan}⚑ "    # the number of stashed files/dir
   # GIT_PROMPT_CLEAN="${BoldGreen}✔"      # a colored flag indicating a "clean" repo
 
   ## For the command indicator, the placeholder _LAST_COMMAND_STATE_ 
@@ -35,12 +35,12 @@ override_git_prompt_colors() {
   ## template for displaying the current virtual environment
   ## use the placeholder _VIRTUALENV_ will be replaced with 
   ## the name of the current virtual environment (currently CONDA and VIRTUAL_ENV)
-  # GIT_PROMPT_VIRTUALENV="(${Blue}_VIRTUALENV_${ResetColor}) "
+  GIT_PROMPT_VIRTUALENV="(${Cyan}_VIRTUALENV_${ResetColor}) "
   
   ## _LAST_COMMAND_INDICATOR_ will be replaced by the appropriate GIT_PROMPT_COMMAND_OK OR GIT_PROMPT_COMMAND_FAIL
-  GIT_PROMPT_START_USER="_LAST_COMMAND_INDICATOR_ ${Blue}${PathShort}${ResetColor}"
+  GIT_PROMPT_START_USER="_LAST_COMMAND_INDICATOR_ ${Cyan}${PathShort}${ResetColor}"
   GIT_PROMPT_START_ROOT="_LAST_COMMAND_INDICATOR_ ${Red}${PathShort}${ResetColor}"
-  GIT_PROMPT_END_USER="\n${Blue}\u@\h ${Time12a}${ResetColor} $ "
+  GIT_PROMPT_END_USER="\n${Cyan}\u@\h ${Time12a}${ResetColor} $ "
   GIT_PROMPT_END_ROOT="\n${Red}\u@\h ${Time12a}${ResetColor} # "
 
   ## Please do not add colors to these symbols
