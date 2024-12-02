@@ -35,7 +35,6 @@ if ($#ARGV >= $[) {
 	"/opt/games",
 	"/news/readers",
 	"/opt/local",
-    "/home/chk/.krew",
 	"/local" );
 
 @pathdirs = (
