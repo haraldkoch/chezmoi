@@ -30,3 +30,12 @@ alias containers="kubectl get pods --all-namespaces -o jsonpath=\"{.items[*].spe
 if [ -r $dotdot/aliases_private ] ; then
     source $dotdot/aliases_private
 fi
+
+alias wake-yvonne="wol 6c:0b:84:e3:0c:34"
+
+apptemplate() {
+    app=$1
+    ns=$2
+
+    yq .spec.values kubernetes/main/apps/${ns}/${app}/app/helmrelease.yaml | sed -e "s/*app/${app}/g" | helm template -n ${ns} ${app} bjw-s/app-template -f - | less
+}
